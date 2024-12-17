@@ -6,7 +6,7 @@
 using namespace std;
 
 void LibrarySystem::saveBooks() {
-    FILE* file = fopen("data/book.txt", "w"); // Remplace le contenu existant
+    FILE* file = fopen("data/book.txt", "w"); 
     if (!file) {
         cerr << "Error: Unable to open book.txt for writing.\n";
         return;
@@ -21,7 +21,7 @@ void LibrarySystem::saveBooks() {
 
 void LibrarySystem::addBook() {
     Book book;
-    book.id = ++bookCounter; // Utiliser le compteur pour générer un ID unique
+    book.id = ++bookCounter; 
 
     cout << "Author: ";
     cin.ignore();
@@ -72,7 +72,7 @@ void LibrarySystem::readBooks() {
     Book book;
     int category;
 
-    // Réinitialiser le compteur avant de lire les livres
+    
     bookCounter = 0;
 
     cout << "\nBooks List:\n";
@@ -84,7 +84,7 @@ void LibrarySystem::readBooks() {
         book.category = static_cast<Category>(category);
         books.push_back(book);
 
-        // Mettre à jour bookCounter avec l'identifiant maximum
+        
         if (book.id > bookCounter) {
             bookCounter = book.id;
         }
@@ -162,9 +162,8 @@ void LibrarySystem::updateBook() {
     int bookId;
     cout << "Enter the book ID that you want to update: ";
     cin >> bookId;
-    cin.ignore(); // Consomme le '\n' restant
+    cin.ignore(); 
 
-    // Recherche du livre dans le vecteur books
     bool bookFound = false;
     for (auto &book : books) {
         if (book.id == bookId) {
@@ -225,9 +224,9 @@ void LibrarySystem::updateClient() {
     int clientId;
     cout << "Enter the client id that you want to update: ";
     cin >> clientId;
-    cin.ignore(); // Consomme le '\n' restant
+    cin.ignore(); 
 
-    // Recherche du client dans le vecteur clients
+    
     for (auto &client : clients) {
         if (client.id == clientId) {
             cout << "Client found. Update the information:\n";
@@ -271,9 +270,9 @@ void LibrarySystem::deleteClient() {
 ///////////////////
 void LibrarySystem::addOrder() {
     Order order;
-    order.id = ++orderCounter; // ID unique pour chaque commande
+    order.id = ++orderCounter; // ID unique for ever order
 
-    // Sélectionner un client
+    
     cout << "Enter Client ID: ";
     int clientId;
     cin >> clientId;
@@ -288,7 +287,7 @@ void LibrarySystem::addOrder() {
     }
     order.client = *clientIt;
 
-    // Ajouter des livres
+    // add book
     char moreBooks;
     do {
         OrderDetail detail;
@@ -320,7 +319,7 @@ void LibrarySystem::addOrder() {
         order.details.push_back(detail);
         order.total += detail.subtotal;
 
-        // Réduire le stock
+        // change stock
         bookIt->stock -= detail.quantity;
 
         cout << "Add another book? (y/n): ";
@@ -379,7 +378,7 @@ void LibrarySystem::deleteOrder() {
     });
 
     if (it != orders.end()) {
-        // Restaurer le stock
+        // change stock
         for (const auto& detail : it->details) {
             auto bookIt = find_if(books.begin(), books.end(), [&detail](const Book& b) {
                 return b.id == detail.book.id;

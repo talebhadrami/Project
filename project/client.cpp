@@ -74,13 +74,13 @@ void deleteClient() {
     Client client;
     bool found = false;
 
-    // Lecture du fichier client.txt ligne par ligne
+    // read file client.txt ligne par ligne read file ligne by ligne
     while (fscanf(inFile, "%d;%40[^;];%d;%lf\n", &client.id, client.name, &client.age, &client.salary) != EOF) {
         if (client.id == codeToDelete) {
-            found = true;  // Client trouvé, ne pas le réécrire dans le fichier temporaire
+            found = true;  // client found , dont write it agin in tamporories file
             printf("Client supprimé : %s (Code %d).\n", client.name, client.id);
         } else {
-            // Réécriture dans le fichier temporaire pour les clients à conserver
+            //  writing in temperory file for those  client we want to conserve
             fprintf(tempFile, "%d;%s;%d;%.2lf\n", client.id, client.name, client.age, client.salary);
         }
     }

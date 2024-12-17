@@ -1,8 +1,8 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-#include <vector>   // Inclure la bibliothèque vector
-#include <string>   // Inclure la bibliothèque string
+#include <vector>   
+#include <string>   
 
 enum class Category { Fantasy, Fiction, Romance, History };
 
@@ -16,7 +16,7 @@ struct Book {
     Category category;
 };
 
-// Déclaration des fonctions
+// Declaration of functions
 void updateBook(std::vector<Book>& books);
 void deleteBook(std::vector<Book>& books);
 void sortBook(std::vector<Book>& books, const std::string& criterion);
